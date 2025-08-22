@@ -28,40 +28,6 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
-             # 🔹 Build APKs/IPAs for all flavours with auto-incremented patch
-      - name: Build APKs/IPAs for all flavours
-        run: |
-          FLAVOURS=("flavour1" "flavour2" "flavour3")  # Add your flavours here
-          BASE_VERSION="1.0"
-          TOTAL_FLAVOURS=${#FLAVOURS[@]}
-          INDEX=0
-
-          for FLAVOUR in "${FLAVOURS[@]}"; do
-            INDEX=$((INDEX+1))
-            # Patch = BUILD_NUMBER + flavour index - ensures unique version per flavour
-            PATCH=$(( BUILD_NUMBER + INDEX - 1 ))
-            APP_VERSION="$BASE_VERSION.$PATCH"
-            echo "Building flavour: $FLAVOUR with version: $APP_VERSION and build number: $PATCH"
-
-            # Android APK
-            flutter build apk --release \
-              --flavor $FLAVOUR \
-              --build-name=$APP_VERSION \
-              --build-number=$PATCH
-
-            # iOS IPA
-            flutter build ipa --release --no-codesign \
-              --flavor $FLAVOUR \
-              --build-name=$APP_VERSION \
-              --build-number=$PATCH
-
-            # Save artifacts
-            mkdir -p artifacts/$FLAVOUR
-            cp build/app/outputs/flutter-apk/app-release.apk artifacts/$FLAVOUR/app-$FLAVOUR-$APP_VERSION.apk || true
-            cp build/ios/ipa/*.ipa artifacts/$FLAVOUR/app-$FLAVOUR-$APP_VERSION.ipa || true
-          done
-
-
       - name: Run tests
         run: flutter test
 
