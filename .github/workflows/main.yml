@@ -33,9 +33,9 @@ jobs:
         run: |
             INFO_PLIST=ios/Runner/Info.plist
             if [ -f "$INFO_PLIST" ]; then
-                CURRENT_BUILD_NUMBER=$(/usr/libexec/PlistBuddy -c "Print CFBundleVersion" "$INFO_PLIST")
+                ${FLUTTER_BUILD_NUMBER}=$(/usr/libexec/PlistBuddy -c "Print CFBundleVersion" "$INFO_PLIST")
                 echo "Current iOS build number: $CURRENT_BUILD_NUMBER"
-                NEW_BUILD_NUMBER=$((CURRENT_BUILD_NUMBER + 1))
+                NEW_BUILD_NUMBER=$((${FLUTTER_BUILD_NUMBER} + 1))
             echo "BUILD_NUMBER=$NEW_BUILD_NUMBER" >> $GITHUB_ENV
             else
                 echo "BUILD_NUMBER=1" >> $GITHUB_ENV
