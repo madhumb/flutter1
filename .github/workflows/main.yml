@@ -67,7 +67,7 @@ jobs:
             
 
       - name: Build iOS IPA
-        run: flutter build ipa 
+        run: flutter build ipa --release 
 
       - name: Upload Android APK artifact
         uses: actions/upload-artifact@v4
