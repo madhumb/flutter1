@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.demo_flutter_app"
+    namespace = "com.recode.bookmark"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
