@@ -36,8 +36,7 @@ jobs:
             
 
       - name: Build iOS IPA
-        run: flutter build ipa --release --no-codesign \
-            --export-method ad-hoc
+        run: flutter build ipa --release --no-codesign 
 
       - name: Upload Android APK artifact
         uses: actions/upload-artifact@v4
