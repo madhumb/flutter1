@@ -251,7 +251,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/bin/sh \"$FLUTTER_ROOT/packages/flutter_tools/bin/xcode_backend.sh\" build\nbuildnum=$(/usr/libexec/PlistBuddy -c \"Print :CFBundleVersion\" \"$PRODUCT_SETTINGS_PATH\")\n\nif [ \"$CONFIGURATION\" = \"Release\" ]; then\nbuildnum=$((buildnum + 1))\necho \"Build number updated to $buildnum\"\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildnum\" \"$PRODUCT_SETTINGS_PATH\"\nfi;\n";
+			shellScript = "/bin/sh \"$FLUTTER_ROOT/packages/flutter_tools/bin/xcode_backend.sh\" build\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
