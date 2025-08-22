@@ -19,8 +19,8 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: stable
-          architecture: arm64  # For Apple Silicon macOS runners
+          flutter-version: '3.24.3'   # ✅ pinned stable version
+          architecture: arm64         # ✅ required for Apple Silicon runners
 
       - name: Flutter doctor
         run: flutter doctor -v
