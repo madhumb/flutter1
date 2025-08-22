@@ -3,14 +3,14 @@ name: Flutter CI/CD
 on:
   push:
     branches:
-      - main # Trigger on pushes to the main branch
+      - main
   pull_request:
     branches:
-      - main # Trigger on pull requests to the main branch
+      - main
 
 jobs:
   build_android_ios:
-    runs-on: macos-latest # Use macOS for iOS build capabilities
+    runs-on: macos-latest
 
     steps:
       - name: Checkout code
@@ -19,9 +19,11 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: 'stable' # Use the stable Flutter channel
-          channel: stable
-          architecture: arm64  # Important for Apple Silicon
+          flutter-version: stable
+          architecture: arm64  # For Apple Silicon macOS runners
+
+      - name: Flutter doctor
+        run: flutter doctor -v
 
       - name: Install dependencies
         run: flutter pub get
@@ -33,7 +35,7 @@ jobs:
         run: flutter build apk --release
 
       - name: Build iOS IPA
-        run: flutter build ipa --release --no-codesign # --no-codesign for basic build without signing setup
+        run: flutter build ipa --release --no-codesign
 
       - name: Upload Android APK artifact
         uses: actions/upload-artifact@v4
