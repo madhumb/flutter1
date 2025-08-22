@@ -28,19 +28,6 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
-        # 🔹 Read existing iOS build number and increment
-      - name: Get iOS build number
-        run: |
-            INFO_PLIST=ios/Runner/Info.plist
-            if [ -f "$INFO_PLIST" ]; then
-                ${FLUTTER_BUILD_NUMBER}=$(/usr/libexec/PlistBuddy -c "Print CFBundleVersion" "$INFO_PLIST")
-                echo "Current iOS build number: $FLUTTER_BUILD_NUMBER"
-                NEW_BUILD_NUMBER=$((${FLUTTER_BUILD_NUMBER} + 1))
-            echo "BUILD_NUMBER=$NEW_BUILD_NUMBER" >> $GITHUB_ENV
-            else
-                echo "BUILD_NUMBER=1" >> $GITHUB_ENV
-            fi
-
              # 🔹 Build APKs/IPAs for all flavours with auto-incremented patch
       - name: Build APKs/IPAs for all flavours
         run: |
